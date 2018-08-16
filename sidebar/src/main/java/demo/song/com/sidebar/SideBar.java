@@ -14,6 +14,7 @@ public class SideBar extends View {
     private String initials[]={"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
     private Paint mPaint;
     private int initialHeight;
+    private int touchItem=-1;
     private SideBarItemSelectedListener listener;
     public SideBar(Context context) {
         this(context, null);
@@ -36,12 +37,12 @@ public class SideBar extends View {
         super.onDraw(canvas);
         int height=getHeight();
         initialHeight=height/initials.length;
-        for(int i=0;i<initials.length;i++){
-            mPaint.setColor(Color.BLUE);
+        for(int i=0;i<initials.length;i++) {
+            mPaint.setColor(i == touchItem ? Color.GREEN : Color.BLUE);
             mPaint.setAntiAlias(true);
             mPaint.setTextSize(30);
             mPaint.setTextAlign(Paint.Align.RIGHT);
-            canvas.drawText(initials[i],100,(initialHeight*i),mPaint);
+            canvas.drawText(initials[i], 100, (initialHeight * i), mPaint);
             mPaint.reset();
         }
     }
@@ -54,12 +55,14 @@ public class SideBar extends View {
                 float point = event.getY();
                 int index = (int) (point / initialHeight);
                 if(listener!=null){
+                    touchItem=index;
                     listener.itemSelected(initials[index]);
                 }
                 return true;
             case MotionEvent.ACTION_UP:
                 break;
         }
+        invalidate();
         return super.onTouchEvent(event);
     }
     public void setItemSelectedListener(SideBarItemSelectedListener listener){

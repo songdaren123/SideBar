@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
-    private String TAG="MainActivity";
+    private final  String TAG=MainActivity.class.getSimpleName();
     private SideBar mSideBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
