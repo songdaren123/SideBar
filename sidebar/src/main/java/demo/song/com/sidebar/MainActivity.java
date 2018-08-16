@@ -4,9 +4,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
     private final  String TAG=MainActivity.class.getSimpleName();
     private SideBar mSideBar;
+    private List<CityInfo> citys;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,5 +22,18 @@ public class MainActivity extends AppCompatActivity {
                 Log.i(TAG, "itemSelected: "+str);
             }
         });
+    }
+    private void initData() {
+        citys = new ArrayList<>();
+        citys.add(new CityInfo("北京", 1));
+        citys.add(new CityInfo("上海", 2));
+        citys.add(new CityInfo("天津", 3));
+        citys.add(new CityInfo("重庆", 4));
+        citys.add(new CityInfo("山东", 5));
+        citys.add(new CityInfo("山西", 6));
+        citys.add(new CityInfo("河南", 7));
+        citys.add(new CityInfo("河北", 8));
+        citys.add(new CityInfo("广东", 9));
+        citys.add(new CityInfo("广西", 10));
     }
 }
