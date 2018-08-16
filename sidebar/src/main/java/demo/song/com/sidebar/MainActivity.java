@@ -1,8 +1,14 @@
 package demo.song.com.sidebar;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,18 +19,23 @@ public class MainActivity extends AppCompatActivity {
     private final  String TAG=MainActivity.class.getSimpleName();
     private SideBar mSideBar;
     private List<CityInfo> citys;
+    private RecyclerView mRecyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initData();
         mSideBar=findViewById(R.id.sidebar);
+        mRecyclerView=findViewById(R.id.recycelview);
         mSideBar.setItemSelectedListener(new SideBar.SideBarItemSelectedListener() {
             @Override
             public void itemSelected(String str) {
                 Log.i(TAG, "itemSelected: "+str);
             }
         });
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
     }
     private void initData() {
         citys = new ArrayList<>();
@@ -56,6 +67,30 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public int compare(CityInfo cityInfo, CityInfo t1) {
             return cityInfo.getLetter().compareTo(t1.getLetter());
+        }
+    }
+
+    private class CityAdapter extends RecyclerView.Adapter<CityHolder> {
+        @NonNull
+        @Override
+        public CityHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            return null;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull CityHolder cityHolder, int i) {
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return 0;
+        }
+    }
+
+    private class CityHolder extends RecyclerView.ViewHolder {
+        public CityHolder(@NonNull View itemView) {
+            super(itemView);
         }
     }
 }

@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
-    <demo.song.com.sidebar.SideBar
-        android:id="@+id/sidebar"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycelview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
+    <demo.song.com.sidebar.SideBar
+        android:id="@+id/sidebar"
+        android:layout_width="30dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center|right"
+        />
 
-</LinearLayout>
+</FrameLayout>
