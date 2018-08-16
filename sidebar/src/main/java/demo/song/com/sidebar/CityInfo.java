@@ -3,6 +3,7 @@ package demo.song.com.sidebar;
 public class CityInfo {
     private String name;
     private int code;
+    private String letter;
 
     public CityInfo(String name, int code) {
         this.name = name;
@@ -23,5 +24,13 @@ public class CityInfo {
 
     public void setCode(int code) {
         this.code = code;
+    }
+
+    public String getLetter() {
+        return letter;
+    }
+
+    public void setLetter(String letter) {
+        this.letter = letter;
     }
 }
