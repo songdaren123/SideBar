@@ -6,9 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private List<CityInfo> citys;
     private RecyclerView mRecyclerView;
     private CityAdapter mCityAdapter;
+    private static Toast makeText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void itemSelected(String str) {
                 int index = mCityAdapter.getIndex(str);
+                showToast(str);
                 if (index != -1) {
                     mRecyclerView.scrollToPosition(index);
                 }
@@ -45,6 +48,17 @@ public class MainActivity extends AppCompatActivity {
         mCityAdapter = new CityAdapter();
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         mRecyclerView.setAdapter(mCityAdapter);
+    }
+
+    private void showToast(String str) {
+        if (makeText == null) {
+            makeText = Toast.makeText(MainActivity.this, str, Toast.LENGTH_SHORT);
+            makeText.setGravity(Gravity.CENTER, 0, 0);
+        } else {
+            makeText.setText(str);
+            makeText.setDuration(Toast.LENGTH_SHORT);
+        }
+        makeText.show();
     }
 
     private void initData() {
@@ -81,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
             city.setLetter(letter.toUpperCase());
         }
         Collections.sort(citys, new PinyinComparable());
-
 
     }
 
