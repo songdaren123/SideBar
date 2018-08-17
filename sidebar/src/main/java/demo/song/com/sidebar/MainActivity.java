@@ -89,10 +89,17 @@ public class MainActivity extends AppCompatActivity {
         citys.add(new CityInfo("青海", 24));
         citys.add(new CityInfo("新疆", 25));
         citys.add(new CityInfo("宁夏", 26));
+        citys.add(new CityInfo("#东京", 27));
+        citys.add(new CityInfo("@伦敦", 28));
         for (CityInfo city : citys) {
             String pinyin = CharacterParser.getInstance().getSelling(city.getName());
             String letter = pinyin.substring(0, 1);
-            city.setLetter(letter.toUpperCase());
+            if (letter.matches("\\w")) {
+                city.setLetter(letter.toUpperCase());
+            } else {
+                city.setLetter("#");
+            }
+
         }
         Collections.sort(citys, new PinyinComparable());
 
@@ -103,6 +110,11 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public int compare(CityInfo cityInfo, CityInfo t1) {
+            if (cityInfo.getLetter().equals("@") || t1.getLetter().equals("#")) {
+                return -1;
+            } else if (cityInfo.getLetter().equals("#") || t1.getLetter().equals("@")) {
+                return 1;
+            }
             return cityInfo.getLetter().compareTo(t1.getLetter());
         }
     }
