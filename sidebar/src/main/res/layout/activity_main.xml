@@ -14,6 +14,7 @@
         android:layout_width="30dp"
         android:layout_height="match_parent"
         android:layout_gravity="center|right"
+        android:padding="10dp"
         />
 
 </FrameLayout>
